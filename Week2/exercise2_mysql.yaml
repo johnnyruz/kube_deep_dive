@@ -12,6 +12,19 @@ spec:
     tier: mysql
   clusterIP: None
 ---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: [CREATE PVC NAME]
+  labels:
+    app: wordpress
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 20Gi
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -40,3 +53,10 @@ spec:
         ports:
         - containerPort: 3306
           name: mysql
+        volumeMounts:
+        - name: [DEFINE VOLUME NAME]
+          mountPath: /var/lib/mysql
+      volumes:
+      - name: [DEFINE VOLUME NAME]
+        persistentVolumeClaim:
+          claimName: [CREATE PVC NAME]
