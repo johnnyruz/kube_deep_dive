@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: app-1
+  labels:
+    env: dev
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      env: dev
+      tier: frontend
+  template:
+    metadata:
+      name: app
+      labels:
+        bu: finance
+        env: dev
+        tier: frontend
+    spec:
+      containers:
+        - name: busybox
+          image: busybox
+          command: ["sleep"]
+          args: ["4800"]
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-1
+  labels:
+    bu: finance
+    env: prod
+spec:
+  selector:
+    name: app-2
+  ports:
+    - name: name-of-the-port
+      port: 3306
+      targetPort: 8080

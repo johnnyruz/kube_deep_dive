@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: db-2
+  labels:
+    env: prod
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      env: prod
+      tier: db
+  template:
+    metadata:
+      name: db
+      labels:
+        bu: finance
+        env: prod
+        tier: db
+    spec:
+      containers:
+        - name: busybox
+          image: busybox
+          command: ["sleep"]
+          args: ["4800"]

@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: app-2
+  labels:
+    env: prod
+spec:
+  replicas: 1
+  selector:
+    matchExpressions:
+      - key: bu
+        operator: DoesNotExist
+    matchLabels:
+      env: prod
+      tier: frontend
+  template:
+    metadata:
+      name: app
+      labels:
+        env: prod
+        tier: frontend
+    spec:
+      containers:
+        - name: busybox
+          image: busybox
+          command: ["sleep"]
+          args: ["4800"]

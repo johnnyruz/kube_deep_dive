@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: auth
+  labels:
+    bu: finance
+    env: prod
+spec:
+  containers:
+    - name: busybox
+      image: busybox
+      command: ["sleep"]
+      args: ["4800"]
