@@ -1,7 +1,7 @@
 # Setup
 
 1. Install metrics server to your cluster.  Metrics Server collects resource metrics from Kubelets and exposes them in Kubernetes apiserver through Metrics API for use by Horizontal Pod Autoscaler and Vertical Pod Autoscaler. 
-Run `kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml`
+Run `kubectl apply -f metrics-server.yaml` 
 2. Run and expose php-apache server 
 
 To demonstrate Horizontal Pod Autoscaler we will use a custom docker image based on the php-apache image. The Dockerfile has the following content:
