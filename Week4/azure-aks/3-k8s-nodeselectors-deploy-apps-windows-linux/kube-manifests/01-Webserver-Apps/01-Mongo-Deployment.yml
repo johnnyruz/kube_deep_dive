@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongo
+  labels:
+    name: mongo
+    tier: backend
+spec:
+  selector:
+    matchLabels:
+      name: mongo
+      tier: backend
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: mongo
+        tier: backend
+    spec:
+      containers:
+        - name: mongo
+          image: mongo:4.2
+          args:
+            - --bind_ip
+            - 0.0.0.0
+          resources:
+            requests:
+              cpu: 100m
+              memory: 100Mi
+          ports:
+            - containerPort: 27017
+      # To schedule pods on based on NodeSelectors
+      nodeSelector:
+        app: system-apps

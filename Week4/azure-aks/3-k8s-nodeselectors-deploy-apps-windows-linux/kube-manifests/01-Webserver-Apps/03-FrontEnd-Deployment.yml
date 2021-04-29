@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  labels:
+    name: guestbook
+    tier: frontend
+spec:
+  selector:
+    matchLabels:
+      name: guestbook
+      tier: frontend
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        name: guestbook
+        tier: frontend
+    spec:
+      containers:
+        - name: guestbook
+          image: paulczar/gb-frontend:v5
+          resources:
+            requests:
+              cpu: 100m
+              memory: 100Mi
+          env:
+            - name: GET_HOSTS_FROM
+              value: dns
+          ports:
+            - containerPort: 80
+      # To schedule pods on based on NodeSelectors
+      nodeSelector:
+        app: system-apps
