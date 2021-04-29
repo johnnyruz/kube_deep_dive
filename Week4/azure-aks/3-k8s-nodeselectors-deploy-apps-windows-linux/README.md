@@ -62,12 +62,10 @@ kubectl get pod -o=custom-columns=NODE-NAME:.spec.nodeName,POD-NAME:.metadata.na
 kubectl get svc
 
 # Access Webserver App (Running on System Nodepool)
-http://<public-ip-of-webserver-app>/app1/index.html
+http://<public-ip-of-webserver-app>
 
-# Access Java-App (Running on linux101 nodepool)
-http://<public-ip-of-java-app>
-Username: admin101
-Password: password101
+# Run the Cassandra nodetool inside the first Pod (Running on linux101 nodepool)
+kubectl exec -it cassandra-0 -- nodetool status
 
 # Access Windows App (Running on win101 nodepool)
 http://<public-ip-of-windows-app>
